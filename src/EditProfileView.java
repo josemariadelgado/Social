@@ -50,7 +50,7 @@ public class EditProfileView extends JFrame {
 								
 								errorMessageLabel.setText("'" + username + "' already exists");
 								errorMessageLabel.setVisible(true);
-								userAlreadyExists += 1;
+								userAlreadyExists ++;
 						
 						}
 						
@@ -220,7 +220,7 @@ public class EditProfileView extends JFrame {
 			}
 		};
 		
-		setBounds(650, 200, 700, 450);
+		setBounds(650, 250, 700, 450);
 		setVisible(true);
 		
 		panel = new JPanel();

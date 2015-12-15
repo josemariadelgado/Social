@@ -42,7 +42,7 @@ public class SignUpView extends JFrame {
 						
 						errorMessageLabel.setText("'" + username + "' already exists");
 						errorMessageLabel.setVisible(true);
-						userAlreadyExists += 1;
+						userAlreadyExists ++;
 						
 						}
 						

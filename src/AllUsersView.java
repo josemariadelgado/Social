@@ -15,8 +15,8 @@ public class AllUsersView extends JFrame {
 	static JList allUsersList;
 	DefaultListModel allUsersListModel;
 	JScrollPane allUsersScrollPane;
-	JButton showUserButton;
-	MouseListener openShowUserView, enableShowUserButton;
+	JLabel nameLabel, lastNameLabel, usernameLabel, phoneNumberLabel, addressLabel;
+	MouseListener showUser;
 	
 	public void loadAllUsers() {
 		
@@ -55,28 +55,57 @@ public class AllUsersView extends JFrame {
 		
 	}
 	
+	public void getUserData() {
+		
+		String username = (String) AllUsersView.allUsersList.getSelectedValue();
+		
+		try {
+			
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/dbtest", "root", "123");
+			
+			Statement st = (Statement) conn.createStatement();
+			ResultSet rs = st.executeQuery("Select * from user where username = '" + username + "';");
+			
+			if (rs.next()) {
+				
+				int id = rs.getInt("userId");
+				String name = rs.getString("name");
+				String lastName = rs.getString("lastName");
+				String phoneNumber = rs.getString("phone");
+				String address = rs.getString("address");
+				
+				nameLabel.setText(name);
+				lastNameLabel.setText(lastName);
+				usernameLabel.setText(username);
+				phoneNumberLabel.setText(phoneNumber);
+				addressLabel.setText(address);
+				
+			}
+			
+			st.close();
+			conn.close();
+			
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			
+		}
+		
+	}
+	
 	public AllUsersView() {
 		
-		openShowUserView = new MouseAdapter() {
+		showUser = new MouseAdapter() {
 			
 			public void mouseClicked(MouseEvent arg0) {
 				
-				Main.showUserFrame = new ShowUserView();
-			}
-		};
-		
-		enableShowUserButton = new MouseAdapter() {
-			
-			public void mouseClicked(MouseEvent arg0) {
-				
-				showUserButton.setEnabled(true);
-				showUserButton.removeMouseListener(openShowUserView);
-				showUserButton.addMouseListener(openShowUserView);
+				getUserData();
+				Main.allUsersFrame.setSize(750, 350);
+				Main.allUsersFrame.setTitle("All Users - @" + allUsersList.getSelectedValue());
 				
 			}
 		};
 		
-		setBounds(850, 200, 400, 550);
+		setBounds(650, 250, 400, 350);
 		setTitle("All Users");
 		setVisible(true);
 		
@@ -89,17 +118,31 @@ public class AllUsersView extends JFrame {
 		allUsersList = new JList(allUsersListModel);
 		allUsersList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		allUsersList.setFont(new Font("Ubuntu", 0, 18));
-		allUsersList.addMouseListener(enableShowUserButton);
+		allUsersList.addMouseListener(showUser);
 		allUsersScrollPane = new JScrollPane(allUsersList);
 		allUsersScrollPane.setBounds(0, 0, 400, 350);
 		allUsersScrollPane.setViewportBorder(null);
 		panel.add(allUsersScrollPane);
 		
-		showUserButton = new JButton("Show User");
-		showUserButton.setBounds(5, 360, 100, 30);
-		showUserButton.setFocusable(false);
-		showUserButton.setEnabled(false);
-		panel.add(showUserButton);
+		nameLabel = new JLabel();
+		lastNameLabel = new JLabel();
+		usernameLabel = new JLabel();
+		phoneNumberLabel = new JLabel();
+		addressLabel = new JLabel();
+		nameLabel.setFont(new Font("Ubuntu", 0, 25));
+		nameLabel.setBounds(440, 20, 200, 30);
+		lastNameLabel.setBounds(440, 45, 200, 30);
+		usernameLabel.setBounds(454, 70, 200, 30);
+		phoneNumberLabel.setBounds(440, 95, 200, 30);
+		addressLabel.setBounds(440, 120, 200, 30);
+		JLabel atLabel = new JLabel("@");
+		atLabel.setBounds(440, 70, 20, 30);
+		panel.add(atLabel);
+		panel.add(nameLabel);
+		panel.add(lastNameLabel);
+		panel.add(usernameLabel);
+		panel.add(phoneNumberLabel);
+		panel.add(addressLabel);
 		
 	}
 

@@ -34,7 +34,7 @@ public class HomeScreenView extends JFrame{
 				String name = rs.getString("name");
 				String lastName = rs.getString("lastName");
 				
-				System.out.println("\nLogged in as: " + username + "\nid = " + id + "\nname: " + name + "\nLast Name: " + lastName);
+				System.out.println("\nLogged in as: " + username + "\nid = " + id + "\nName: " + name + "\nLast Name: " + lastName);
 				
 				nameLabel.setText(name);
 				lastNameLabel.setText(lastName);
@@ -150,10 +150,10 @@ public class HomeScreenView extends JFrame{
 		
 		logOutButton = new JButton("Log Out");
 		editProfileButton = new JButton("Edit Profile");
-		showAllUsersButton = new JButton("Show Users");
+		showAllUsersButton = new JButton("Show All Users");
 		logOutButton.setBounds(690, 10, 100, 30);
 		editProfileButton.setBounds(60, 110, 100, 30);
-		showAllUsersButton.setBounds(60, 145, 100, 30);
+		showAllUsersButton.setBounds(60, 145, 125, 30);
 		logOutButton.setFocusable(false);
 		editProfileButton.setFocusable(false);
 		showAllUsersButton.setFocusable(false);
