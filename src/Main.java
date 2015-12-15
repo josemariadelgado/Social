@@ -10,7 +10,7 @@ import javax.swing.text.DocumentFilter;
 import com.mysql.jdbc.Statement;
 
 public class Main extends LogInView {
-	static JFrame frame, homeScreenFrame, signUpFrame, editProfileFrame, allUsersFrame;
+	static JFrame frame, homeScreenFrame, signUpFrame, editProfileFrame, allUsersFrame, showUserFrame;
 	static ArrayList<String> userArrayList = new ArrayList<String>();
 	
 	public static void main(String[] args) {

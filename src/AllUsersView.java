@@ -1,18 +1,22 @@
 
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-
 import javax.swing.*;
 
 import com.mysql.jdbc.Statement;
 
 public class AllUsersView extends JFrame {
 	JPanel panel;
-	JList allUsersList;
+	static JList allUsersList;
 	DefaultListModel allUsersListModel;
 	JScrollPane allUsersScrollPane;
+	JButton showUserButton;
+	MouseListener openShowUserView, enableShowUserButton;
 	
 	public void loadAllUsers() {
 		
@@ -33,7 +37,8 @@ public class AllUsersView extends JFrame {
 				
 				if (!username.equals(HomeScreenView.usernameLabel.getText())) {
 					
-					allUsersListModel.addElement(nameLastNameUsername);
+					allUsersListModel.addElement(username);
+					
 				}
 				
 			}
@@ -50,10 +55,28 @@ public class AllUsersView extends JFrame {
 		
 	}
 	
-	
 	public AllUsersView() {
 		
-		setBounds(800, 200, 400, 550);
+		openShowUserView = new MouseAdapter() {
+			
+			public void mouseClicked(MouseEvent arg0) {
+				
+				Main.showUserFrame = new ShowUserView();
+			}
+		};
+		
+		enableShowUserButton = new MouseAdapter() {
+			
+			public void mouseClicked(MouseEvent arg0) {
+				
+				showUserButton.setEnabled(true);
+				showUserButton.removeMouseListener(openShowUserView);
+				showUserButton.addMouseListener(openShowUserView);
+				
+			}
+		};
+		
+		setBounds(850, 200, 400, 550);
 		setTitle("All Users");
 		setVisible(true);
 		
@@ -66,11 +89,17 @@ public class AllUsersView extends JFrame {
 		allUsersList = new JList(allUsersListModel);
 		allUsersList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		allUsersList.setFont(new Font("Ubuntu", 0, 18));
+		allUsersList.addMouseListener(enableShowUserButton);
 		allUsersScrollPane = new JScrollPane(allUsersList);
 		allUsersScrollPane.setBounds(0, 0, 400, 350);
 		allUsersScrollPane.setViewportBorder(null);
 		panel.add(allUsersScrollPane);
 		
+		showUserButton = new JButton("Show User");
+		showUserButton.setBounds(5, 360, 100, 30);
+		showUserButton.setFocusable(false);
+		showUserButton.setEnabled(false);
+		panel.add(showUserButton);
 		
 	}
 

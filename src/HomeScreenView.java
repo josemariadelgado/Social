@@ -34,13 +34,16 @@ public class HomeScreenView extends JFrame{
 				String name = rs.getString("name");
 				String lastName = rs.getString("lastName");
 				
-				System.out.println("Logged in as: " + username + "\nid = " + id + "\nname: " + name + "\nLast Name: " + lastName);
+				System.out.println("\nLogged in as: " + username + "\nid = " + id + "\nname: " + name + "\nLast Name: " + lastName);
 				
 				nameLabel.setText(name);
 				lastNameLabel.setText(lastName);
 				usernameLabel.setText(username);
 				
 			}
+			
+			st.close();
+			conn.close();
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -105,6 +108,7 @@ public class HomeScreenView extends JFrame{
 				
 				if (dialogResult == JOptionPane.YES_OPTION) {
 					hide();
+					Main.allUsersFrame.setVisible(false);
 					JFrame logIn = new LogInView();
 				}
 			}
@@ -130,7 +134,7 @@ public class HomeScreenView extends JFrame{
 		
 		nameLabel = new JLabel("Name");
 		lastNameLabel = new JLabel("Last Name");
-		usernameLabel = new JLabel("Username");
+		usernameLabel = new JLabel("username");
 		nameLabel.setFont(new Font("Ubuntu", 0, 25));
 		nameLabel.setBounds(60, 30, 200, 30);
 		lastNameLabel.setBounds(60, 55, 200, 30);
