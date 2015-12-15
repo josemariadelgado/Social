@@ -14,8 +14,8 @@ public class HomeScreenView extends JFrame{
 	static JFrame editProfileFrame;
 	JPanel panel;
 	static JLabel nameLabel, lastNameLabel, usernameLabel;
-	JButton editProfileButton, logOutButton;
-	MouseListener openEditProfileView, logOut;
+	JButton editProfileButton, logOutButton, showAllUsersButton;
+	MouseListener openEditProfileView, logOut, openAllUsersView;
 	
 	public void getUserData() {
 		
@@ -79,7 +79,7 @@ public class HomeScreenView extends JFrame{
 						EditProfileView.phoneNumberField.setText(phoneNumber);
 						EditProfileView.addressField.setText(address);
 						
-						editProfileFrame.setTitle("Edit " + username);
+						editProfileFrame.setTitle("Edit " + "@" + username);
 						
 						st.close();
 						conn.close();
@@ -110,9 +110,18 @@ public class HomeScreenView extends JFrame{
 			}
 		};
 		
+		openAllUsersView = new MouseAdapter() {
+			
+			public void mouseClicked(MouseEvent arg0) {
+				
+				Main.allUsersFrame = new AllUsersView();
+				
+			}
+		};
+		
 	    setBounds(625, 200, 800, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle(LogInView.usernameField.getText());
+		setTitle("@" + LogInView.usernameField.getText());
 		setVisible(true);
 		
 		panel = new JPanel();
@@ -125,7 +134,10 @@ public class HomeScreenView extends JFrame{
 		nameLabel.setFont(new Font("Ubuntu", 0, 25));
 		nameLabel.setBounds(60, 30, 200, 30);
 		lastNameLabel.setBounds(60, 55, 200, 30);
-		usernameLabel.setBounds(60, 80, 200, 30);
+		usernameLabel.setBounds(74, 80, 200, 30);
+		JLabel atLabel = new JLabel("@");
+		atLabel.setBounds(60, 80, 20, 30);
+		panel.add(atLabel);
 		panel.add(nameLabel);
 		panel.add(lastNameLabel);
 		panel.add(usernameLabel);
@@ -134,14 +146,19 @@ public class HomeScreenView extends JFrame{
 		
 		logOutButton = new JButton("Log Out");
 		editProfileButton = new JButton("Edit Profile");
+		showAllUsersButton = new JButton("Show Users");
 		logOutButton.setBounds(690, 10, 100, 30);
 		editProfileButton.setBounds(60, 110, 100, 30);
+		showAllUsersButton.setBounds(60, 145, 100, 30);
 		logOutButton.setFocusable(false);
 		editProfileButton.setFocusable(false);
+		showAllUsersButton.setFocusable(false);
 		logOutButton.addMouseListener(logOut);
 		editProfileButton.addMouseListener(openEditProfileView);
+		showAllUsersButton.addMouseListener(openAllUsersView);
 		panel.add(logOutButton);
 		panel.add(editProfileButton);
+		panel.add(showAllUsersButton);
 		
 	}
 }

@@ -1,24 +1,27 @@
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
-
 import com.mysql.jdbc.Statement;
 
-
-
 public class Main extends LogInView {
-	static JFrame frame, homeScreenFrame, editProfileFrame;
+	static JFrame frame, homeScreenFrame, signUpFrame, editProfileFrame, allUsersFrame;
 	static ArrayList<String> userArrayList = new ArrayList<String>();
 	
 	public static void main(String[] args) {
 		frame = new Main();
 		frame.setVisible(true);
 		
+	}
+	
+	public Main() {
+		createUserArrayList();
+	
 	}
 	
 	public static void createUserArrayList(){
@@ -44,15 +47,10 @@ public class Main extends LogInView {
 			conn.close();
 			
 		} catch (Exception e) {
-			
+			JOptionPane.showMessageDialog(null, e.getMessage());
 			
 		}
 		
-	}
-	
-	public Main() {
-		createUserArrayList();
-	
 	}
 	
 }

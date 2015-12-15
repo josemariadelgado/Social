@@ -85,15 +85,15 @@ public class EditProfileView extends JFrame {
 						
 						if (rs.next()) {
 							
-							String hsname = rs.getString("name");
-							String hsLastName = rs.getString("lastName");
-							String hsUsername = rs.getString("username");
+							String homeScreenName = rs.getString("name");
+							String homeScreenLastName = rs.getString("lastName");
+							String homeScreenUsername = rs.getString("username");
 							
-							HomeScreenView.nameLabel.setText(hsname);
-							HomeScreenView.lastNameLabel.setText(hsLastName);
-							HomeScreenView.usernameLabel.setText(hsUsername);
+							HomeScreenView.nameLabel.setText(homeScreenName);
+							HomeScreenView.lastNameLabel.setText(homeScreenLastName);
+							HomeScreenView.usernameLabel.setText(homeScreenUsername);
 							
-							Main.homeScreenFrame.setTitle(username);
+							Main.homeScreenFrame.setTitle("@" + username);
 												
 						}
 						
@@ -138,15 +138,15 @@ public class EditProfileView extends JFrame {
 								
 								if (rs1.next()) {
 									
-									String hsname1 = rs1.getString("name");
-									String hsLastName1 = rs1.getString("lastName");
-									String hsUsername1 = rs1.getString("username");
+									String homeScreenName = rs1.getString("name");
+									String homeScreenLastName = rs1.getString("lastName");
+									String homeScreenUSername = rs1.getString("username");
 									
-									HomeScreenView.nameLabel.setText(hsname1);
-									HomeScreenView.lastNameLabel.setText(hsLastName1);
-									HomeScreenView.usernameLabel.setText(hsUsername1);
+									HomeScreenView.nameLabel.setText(homeScreenName);
+									HomeScreenView.lastNameLabel.setText(homeScreenLastName);
+									HomeScreenView.usernameLabel.setText(homeScreenUSername);
 									
-									Main.homeScreenFrame.setTitle(username);
+									Main.homeScreenFrame.setTitle("@" + username);
 								
 								}
 								

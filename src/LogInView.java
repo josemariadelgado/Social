@@ -80,7 +80,7 @@ public class LogInView extends JFrame {
 		openSignUpView = new MouseAdapter() {
 			
 			public void mouseClicked(MouseEvent arg0) {
-				JFrame signUpFrame = new SignUpView();
+				Main.signUpFrame = new SignUpView();
 				
 			}
 		};
