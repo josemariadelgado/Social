@@ -5,11 +5,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 
 import javax.swing.*;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.DocumentFilter;
+
+import com.mysql.jdbc.PreparedStatement;
 
 public class SignUpView extends JFrame {
 	JPanel panel;
@@ -63,26 +66,23 @@ public class SignUpView extends JFrame {
 				} else {
 				
 				try {
-				
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/dbtest", "root", "123");
-				
-				Statement st = conn.createStatement();
-				st.execute("Insert into user (username, pass, name, lastName, phone, address) values " +
-				"('" + username + "', '" + pass + "', '" + name + "', '" + lastName + "', '" + phoneNumber + "', '" + address + "');");
-				
-				Main.userArrayList.add(username);
-				System.out.println("User created: " + username);
-				System.out.println(Main.userArrayList);
-
-				hide();
 					
-				JOptionPane.showMessageDialog(null, "You have been successfully signed up, now you can log in");
-			
-				
-				st.close();
-				conn.close();
-					 
+					Connection conn = MysqlConnection.getInstance();
+					Statement st = conn.createStatement();
+					
+					st.execute("Insert into user (username, pass, name, lastName, phone, address) values " +
+							"('" + username + "', '" + pass + "', '" + name + "', '" + lastName + "', '" + phoneNumber + "', '" + address + "');");
+					
+					Main.userArrayList.add(username);
+					System.out.println("User created: " + username);
+					System.out.println(Main.userArrayList);
+					
+					hide();
+					
+					JOptionPane.showMessageDialog(null, "You have been successfully signed up, now you can log in");
+					
 				} catch (Exception e) {
+					
 					JOptionPane.showMessageDialog(null, e.getMessage());
 					
 				}
@@ -91,6 +91,7 @@ public class SignUpView extends JFrame {
 				
 				}	
 			}
+			
 		};
 		
 		setBounds(800, 200, 400, 550);

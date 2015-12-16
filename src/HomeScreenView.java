@@ -6,6 +6,7 @@ import java.awt.event.MouseListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.swing.*;
@@ -62,10 +63,11 @@ public class HomeScreenView extends JFrame{
 				
 				try {
 					
-					Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/dbtest", "root", "123");
-					
+					Connection conn = MysqlConnection.getInstance();
 					Statement st = conn.createStatement();
-					ResultSet rs = st.executeQuery("Select * from user where username = '" + username + "';");
+					ResultSet rs;
+					
+					rs = st.executeQuery("Select * from user where username = '" + username + "';");
 					
 					if (rs.next()) { 
 						
@@ -84,8 +86,6 @@ public class HomeScreenView extends JFrame{
 						
 						editProfileFrame.setTitle("Edit " + "@" + username);
 						
-						st.close();
-						conn.close();
 						
 					} else {
 						
@@ -108,8 +108,21 @@ public class HomeScreenView extends JFrame{
 				
 				if (dialogResult == JOptionPane.YES_OPTION) {
 					hide();
-					Main.allUsersFrame.setVisible(false);
-					JFrame logIn = new LogInView();
+					
+					try {
+						
+						if (Main.allUsersFrame.isVisible()) {
+						Main.allUsersFrame.setVisible(false);
+						
+					}
+					
+					} catch (Exception e) {
+						JOptionPane.showMessageDialog(null, e.getMessage());
+						
+					}
+					
+					LogInView logIn = new LogInView();
+					
 				}
 			}
 		};

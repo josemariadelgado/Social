@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import javax.swing.*;
 
+import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 
 public class AllUsersView extends JFrame {
@@ -16,15 +17,18 @@ public class AllUsersView extends JFrame {
 	DefaultListModel allUsersListModel;
 	JScrollPane allUsersScrollPane;
 	JLabel nameLabel, lastNameLabel, usernameLabel, phoneNumberLabel, addressLabel;
-	MouseListener showUser;
+	MouseListener showUser, addAsFriend;
+	JButton addAsFriendButton;
 	
 	public void loadAllUsers() {
 		
 		try {
 			
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/dbtest", "root", "123"); 
+			Connection conn = MysqlConnection.getInstance();
 			Statement st = (Statement) conn.createStatement();
-			ResultSet rs = st.executeQuery("Select * from user;");
+			ResultSet rs;
+			
+			rs = st.executeQuery("Select * from user");
 			
 			allUsersListModel = new DefaultListModel();
 			
@@ -45,9 +49,6 @@ public class AllUsersView extends JFrame {
 			
 			System.out.println("\nShowing all users:\n" + allUsersListModel);
 			
-			st.close();
-			conn.close();
-			
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 			
@@ -61,11 +62,12 @@ public class AllUsersView extends JFrame {
 		
 		try {
 			
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/dbtest", "root", "123");
-			
+			Connection conn = MysqlConnection.getInstance();
 			Statement st = (Statement) conn.createStatement();
-			ResultSet rs = st.executeQuery("Select * from user where username = '" + username + "';");
+			ResultSet rs;
 			
+			rs = st.executeQuery("Select * from user where username = '" + username + "';");
+					
 			if (rs.next()) {
 				
 				int id = rs.getInt("userId");
@@ -82,8 +84,6 @@ public class AllUsersView extends JFrame {
 				
 			}
 			
-			st.close();
-			conn.close();
 			
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
@@ -104,6 +104,32 @@ public class AllUsersView extends JFrame {
 				
 			}
 		};
+		
+		/*addAsFriend = new MouseAdapter() {
+			
+			public void mouseClicked(MouseEvent arg0) {
+				
+				String fromUsername = HomeScreenView.usernameLabel.getText();
+				String toUsername = (String) allUsersList.getSelectedValue();
+				
+				try {
+					
+					Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/dbtest", "root", "123"); 
+					Statement st = (Statement) conn.createStatement();
+					st.execute("Insert into friendship (fromUser, toUser) values ('" + fromUsername + "', '" + toUsername + "');");
+					
+					System.out.println("\n" + fromUsername + " and " + toUsername + " are now friends");
+					
+					st.close();
+					conn.close();
+					
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e.getMessage());
+					
+				}
+				
+			}
+		};*/
 		
 		setBounds(650, 250, 400, 350);
 		setTitle("All Users");
@@ -143,6 +169,11 @@ public class AllUsersView extends JFrame {
 		panel.add(usernameLabel);
 		panel.add(phoneNumberLabel);
 		panel.add(addressLabel);
+		
+		/*addAsFriendButton = new JButton("Add as friend");
+		addAsFriendButton.setBounds(410, 310, 125, 30);
+		addAsFriendButton.addMouseListener(addAsFriend);
+		panel.add(addAsFriendButton);*/
 		
 	}
 

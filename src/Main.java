@@ -2,11 +2,14 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
+
+import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 
 public class Main extends LogInView {
@@ -23,15 +26,16 @@ public class Main extends LogInView {
 		createUserArrayList();
 	
 	}
-	
+
 	public static void createUserArrayList(){
 		
 		try {
 			
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/dbtest", "root", "123");
-			
+			Connection conn = MysqlConnection.getInstance();
 			Statement st = (Statement) conn.createStatement();
-			ResultSet rs = st.executeQuery("Select username from user;");
+			ResultSet rs;
+			
+			rs = st.executeQuery("Select username from user;");
 			
 			while (rs.next()) {
 				
@@ -43,8 +47,7 @@ public class Main extends LogInView {
 			
 			System.out.println(userArrayList);
 			
-			st.close();
-			conn.close();
+		
 			
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());

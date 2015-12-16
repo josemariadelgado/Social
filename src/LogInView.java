@@ -7,10 +7,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.*;
 import javax.swing.*;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.DocumentFilter;
+
+import com.mysql.jdbc.PreparedStatement;
 
 public class LogInView extends JFrame {
 	JPanel panel;
@@ -46,18 +49,17 @@ public class LogInView extends JFrame {
 				
 				try {
 					
-					Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/dbtest", "root", "123");
-					
+					Connection conn = MysqlConnection.getInstance();
 					Statement st = conn.createStatement();
-					ResultSet rs = st.executeQuery("Select * from user where userName = '" + username + "' and pass = '" + pass + "';");
+					ResultSet rs;
+					
+					rs = st.executeQuery("Select * from user where userName = '" + username + "' and pass = '" + pass + "';");
 					
 					if (rs.next()) { 
 						
 						hide();
 						Main.homeScreenFrame = new HomeScreenView();
 						
-						st.close();
-						conn.close();
 						
 					} else {
 						errorMessageLabel.setText("Wrong Username or Password");

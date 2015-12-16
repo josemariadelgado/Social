@@ -70,7 +70,7 @@ public class EditProfileView extends JFrame {
 					
 					try {
 						
-						Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/dbtest", "root", "123");
+						Connection conn = MysqlConnection.getInstance();
 						Statement st = (Statement) conn.createStatement();
 						
 						st.execute("Update user set username = '" + username + "', name = '" + name + "', lastName = '" 
@@ -81,7 +81,8 @@ public class EditProfileView extends JFrame {
 						Main.userArrayList.removeAll(Main.userArrayList);
 						Main.createUserArrayList();
 						
-						ResultSet rs = st.executeQuery("Select * from user where username = '" + username + "';");
+						ResultSet rs;
+						rs = st.executeQuery("Select * from user where username = '" + username + "';");
 						
 						if (rs.next()) {
 							
@@ -97,8 +98,6 @@ public class EditProfileView extends JFrame {
 												
 						}
 						
-						st.close();
-						conn.close();
 						
 					} catch (Exception e) {
 						JOptionPane.showMessageDialog(null, e.getMessage());
@@ -110,10 +109,11 @@ public class EditProfileView extends JFrame {
 					
 					try {
 						
-						Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/dbtest", "root", "123");
+						Connection conn = MysqlConnection.getInstance();
 						Statement st = (Statement) conn.createStatement();
+						ResultSet rs;
 						
-						ResultSet rs = st.executeQuery("Select pass from user where username = '" + HomeScreenView.usernameLabel.getText() + "';");
+						rs = st.executeQuery("Select pass from user where username = '" + HomeScreenView.usernameLabel.getText() + "';");
 						
 						if (rs.next()) {
 							
@@ -134,13 +134,13 @@ public class EditProfileView extends JFrame {
 								Main.userArrayList.removeAll(Main.userArrayList);
 								Main.createUserArrayList();
 								
-								ResultSet rs1 = st.executeQuery("Select * from user where username = '" + username + "';");
+								rs = st.executeQuery("Select * from user where username = '" + username + "';");
 								
-								if (rs1.next()) {
+								if (rs.next()) {
 									
-									String homeScreenName = rs1.getString("name");
-									String homeScreenLastName = rs1.getString("lastName");
-									String homeScreenUSername = rs1.getString("username");
+									String homeScreenName = rs.getString("name");
+									String homeScreenLastName = rs.getString("lastName");
+									String homeScreenUSername = rs.getString("username");
 									
 									HomeScreenView.nameLabel.setText(homeScreenName);
 									HomeScreenView.lastNameLabel.setText(homeScreenLastName);
@@ -150,8 +150,6 @@ public class EditProfileView extends JFrame {
 								
 								}
 								
-								st.close();
-								conn.close();
 								
 							} catch (Exception e) {
 								
@@ -167,8 +165,6 @@ public class EditProfileView extends JFrame {
 							
 						}
 						
-						st.close();
-						conn.close();
 						
 					} catch (Exception e) {
 						JOptionPane.showMessageDialog(null, e.getMessage());
@@ -197,7 +193,7 @@ public class EditProfileView extends JFrame {
 					
 					try {
 					
-					Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/dbtest", "root", "123");
+					Connection conn = MysqlConnection.getInstance();
 					Statement st = (Statement) conn.createStatement();
 					
 					st.execute("Delete from user where username = '" + username + "';");
@@ -208,9 +204,6 @@ public class EditProfileView extends JFrame {
 					
 					Main.userArrayList.removeAll(Main.userArrayList);
 					Main.createUserArrayList();
-					
-					st.close();
-					conn.close();
 					
 					} catch (Exception e) {
 						JOptionPane.showMessageDialog(null, e.getMessage());
