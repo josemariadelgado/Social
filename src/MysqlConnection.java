@@ -13,8 +13,8 @@ public class MysqlConnection {
 			if (conn == null) {
 				
 				Class.forName("com.mysql.jdbc.Driver");
-				conn = DriverManager.getConnection("jdbc:mysql://localhost/dbtest", "root", "123"); 
-				System.out.print("Mysql connection succes!");
+				conn = DriverManager.getConnection("jdbc:mysql://localhost/dbtest", "root", "123");
+				System.out.println("\nMysql connection succes!");
 				
 			}
 			

@@ -8,7 +8,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
-
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 
@@ -24,10 +23,37 @@ public class Main extends LogInView {
 	
 	public Main() {
 		createUserArrayList();
-	
+		
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+			
+		    @Override
+		    public void run() {
+		    	
+		    	try {
+		    		
+		    		if (!MysqlConnection.conn.isClosed()) {
+		    			
+		    			MysqlConnection.conn.close();
+		    			
+		    			if (MysqlConnection.conn.isClosed()) {
+		    				
+		    				System.out.println("\nMysql connection closed");
+		    			}
+					
+		    		}
+					
+				} catch (SQLException e) {
+					JOptionPane.showMessageDialog(null, e.getMessage());
+					
+				}
+		        
+		    }
+		    
+		});
+		
 	}
 
-	public static void createUserArrayList(){
+	public static void createUserArrayList() {
 		
 		try {
 			
@@ -46,7 +72,6 @@ public class Main extends LogInView {
 			}
 			
 			System.out.println(userArrayList);
-			
 		
 			
 		} catch (Exception e) {

@@ -114,10 +114,10 @@ public class HomeScreenView extends JFrame{
 						if (Main.allUsersFrame.isVisible()) {
 						Main.allUsersFrame.setVisible(false);
 						
-					}
+						}
 					
 					} catch (Exception e) {
-						JOptionPane.showMessageDialog(null, e.getMessage());
+						System.out.println(e.getMessage());
 						
 					}
 					

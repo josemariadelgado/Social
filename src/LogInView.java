@@ -3,16 +3,12 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.awt.event.WindowEvent;
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.DocumentFilter;
-
 import com.mysql.jdbc.PreparedStatement;
 
 public class LogInView extends JFrame {
@@ -65,8 +61,7 @@ public class LogInView extends JFrame {
 						errorMessageLabel.setText("Wrong Username or Password");
 						errorMessageLabel.setVisible(true);
 						
-					}
-										
+					}				
 					
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e.getMessage());
@@ -135,5 +130,6 @@ public class LogInView extends JFrame {
 		panel.add(label);
 		
 	}
+
 
 }

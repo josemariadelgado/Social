@@ -74,12 +74,13 @@ public class SignUpView extends JFrame {
 							"('" + username + "', '" + pass + "', '" + name + "', '" + lastName + "', '" + phoneNumber + "', '" + address + "');");
 					
 					Main.userArrayList.add(username);
-					System.out.println("User created: " + username);
+					System.out.println("\nUser created: " + username);
 					System.out.println(Main.userArrayList);
 					
 					hide();
 					
 					JOptionPane.showMessageDialog(null, "You have been successfully signed up, now you can log in");
+					
 					
 				} catch (Exception e) {
 					

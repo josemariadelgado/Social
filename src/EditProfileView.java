@@ -115,6 +115,8 @@ public class EditProfileView extends JFrame {
 						
 						rs = st.executeQuery("Select pass from user where username = '" + HomeScreenView.usernameLabel.getText() + "';");
 						
+						
+						
 						if (rs.next()) {
 							
 							getPass = rs.getString("pass");
