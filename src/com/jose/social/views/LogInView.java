@@ -1,3 +1,4 @@
+package com.jose.social.views;
 
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
@@ -9,6 +10,11 @@ import javax.swing.*;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.DocumentFilter;
+
+
+import com.jose.social.LowercaseFilter;
+import com.jose.social.Main;
+import com.jose.social.mysql.MysqlConnection;
 import com.mysql.jdbc.PreparedStatement;
 
 public class LogInView extends JFrame {

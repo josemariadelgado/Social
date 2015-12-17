@@ -1,4 +1,6 @@
 
+package com.jose.social.views;
+
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -8,6 +10,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import javax.swing.*;
 
+import com.jose.social.Main;
+import com.jose.social.mysql.MysqlConnection;
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 

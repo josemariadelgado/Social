@@ -1,3 +1,4 @@
+package com.jose.social.views;
 
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -10,6 +11,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.swing.*;
+
+import com.jose.social.Main;
+import com.jose.social.mysql.MysqlConnection;
 
 public class HomeScreenView extends JFrame{
 	static JFrame editProfileFrame;

@@ -1,3 +1,4 @@
+package com.jose.social.mysql;
 
 import java.sql.*;
 

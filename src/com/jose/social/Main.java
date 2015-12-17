@@ -1,3 +1,5 @@
+package com.jose.social;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,12 +10,15 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
+
+import com.jose.social.mysql.MysqlConnection;
+import com.jose.social.views.LogInView;
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 
 public class Main extends LogInView {
-	static JFrame frame, homeScreenFrame, signUpFrame, editProfileFrame, allUsersFrame;
-	static ArrayList<String> userArrayList = new ArrayList<String>();
+	public static JFrame frame, homeScreenFrame, signUpFrame, editProfileFrame, allUsersFrame;
+	public static ArrayList<String> userArrayList = new ArrayList<String>();
 	
 	public static void main(String[] args) {
 		frame = new Main();
@@ -79,22 +84,6 @@ public class Main extends LogInView {
 			
 		}
 		
-	}
-	
-}
-
-class LowercaseFilter extends DocumentFilter {
-	
-	public void insertString(DocumentFilter.FilterBypass fb, int offset,
-		      String text, javax.swing.text.AttributeSet attr) throws BadLocationException {
-		    fb.insertString(offset, text.toLowerCase(), attr);
-		  
-	}
-	
-	public void replace(DocumentFilter.FilterBypass fb, int offset, int length,
-		      String text, javax.swing.text.AttributeSet attr) throws BadLocationException {
-		    fb.replace(offset, length, text.toLowerCase(), attr);
-		  
 	}
 	
 }
